@@ -1,0 +1,16 @@
+{
+  "ignorePatterns": ["src/**/*.ts"],
+  "parser": "babel-eslint",
+  "extends": [
+    "prettier",
+    "plugin:import/warnings",
+    "plugin:promise/recommended"
+  ],
+  "plugins": ["flowtype", "import", "promise"],
+  "rules": {
+    "import/no-default-export": "error",
+    "no-implicit-coercion": "error",
+    "no-unused-vars": "error",
+    "no-return-await": "error"
+  }
+}

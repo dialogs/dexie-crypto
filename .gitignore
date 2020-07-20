@@ -1,0 +1,9 @@
+.DS_Store
+.idea
+.parcel-cache
+.vscode
+build
+dist
+node_modules
+npm-debug.log
+yarn-error.log

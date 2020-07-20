@@ -1,0 +1,107 @@
+{
+  "name": "@dlghq/dexie-crypto",
+  "version": "1.0.0",
+  "description": "Encryption middleware for Dexie.js",
+  "homepage": "https://github.com/dialogs/dexie-crypto",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dialogs/dexie-crypto.git"
+  },
+  "bugs": "https://github.com/dialogs/dexie-crypto/issues",
+  "author": "Mikhail Nasyrov <mikhail@mnasyrov.com>",
+  "license": "Apache-2.0",
+  "keywords": [
+    "dexie",
+    "dexiejs",
+    "plugin",
+    "crypto",
+    "encryption",
+    "indexeddb"
+  ],
+  "sideEffects": false,
+  "source": "src/index.js",
+  "main": "dist/dexie-crypto.js",
+  "module": "dist/dexie-crypto.module.js",
+  "types": "src/types.d.ts",
+  "files": [
+    "dist",
+    "flow-typed",
+    "src",
+    "test",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "lint": "npm-run-all -s lint:*",
+    "lint:eslint": "eslint src/",
+    "lint:flow": "flow check",
+    "test": "jest",
+    "build": "npm-run-all -s build:*",
+    "build:compile": "parcel build --target main --target module src/index.js",
+    "build:flow": "echo \"// @flow strict\n\nexport * from '../src';\" > dist/dexie-crypto.js.flow",
+    "build:flow-module": "echo \"// @flow strict\n\nexport * from '../src';\" > dist/dexie-crypto.module.js.flow",
+    "preversion": "npm-run-all -s lint test",
+    "postversion": "npm run release",
+    "prerelease": "npm-run-all -s clean build",
+    "release": "npm publish"
+  },
+  "peerDependencies": {
+    "dexie": "^3.0.1",
+    "lodash-es": "^4.17.15"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.10.5",
+    "@babel/core": "7.10.5",
+    "@babel/plugin-proposal-class-properties": "7.10.4",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "7.10.4",
+    "@babel/plugin-proposal-optional-chaining": "7.10.4",
+    "@babel/preset-env": "7.10.4",
+    "@babel/preset-flow": "7.10.4",
+    "@babel/register": "7.10.5",
+    "@jest-runner/electron": "3.0.0",
+    "babel-eslint": "10.1.0",
+    "babel-jest": "26.1.0",
+    "babel-plugin-require-context-hook": "1.0.0",
+    "babel-plugin-transform-class-properties": "6.24.1",
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "core-js-bundle": "3.6.5",
+    "cz-conventional-changelog": "3.2.0",
+    "dexie": "3.0.1",
+    "electron": "9.1.0",
+    "eslint": "7.4.0",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-plugin-flowtype": "5.2.0",
+    "eslint-plugin-import": "2.22.0",
+    "eslint-plugin-promise": "4.2.1",
+    "fake-indexeddb": "3.1.1",
+    "flow-bin": "0.127.0",
+    "husky": "4.2.5",
+    "jest": "26.1.0",
+    "node-webcrypto-ossl": "2.1.0",
+    "npm-run-all": "4.1.5",
+    "rimraf": "3.0.2",
+    "parcel": "2.0.0-beta.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "*.{ts,css,json,md,html}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
